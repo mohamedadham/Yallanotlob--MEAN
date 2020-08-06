@@ -9,7 +9,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+What things you need to install the software
 
 ```
 1- NodeJS
@@ -26,7 +26,7 @@ A step by step that tell you how to get a development env running.
 3- run npm start (in server and client folders)
 ```
 ### Feautres
-
+```
 1- Session based Authentication System
 2- User can add friends
 3- User can create group 
@@ -35,6 +35,7 @@ A step by step that tell you how to get a development env running.
 6- User can add/remove his items to the order he created or invited to.
 7- User created the order can cancel/finish it, add/remove any items/order's members.
 8- Push notifications to user when he is invited to order or invited friend joins his order.
+```
 
 ## Built With
 
