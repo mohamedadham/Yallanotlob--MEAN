@@ -1,0 +1,51 @@
+<div class="card text-center m-3">
+    <h3 class="card-header">My Orders</h3>
+    <div class="card-body">  
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Order</th>
+                    <th scope="col">Restaurant</th>
+                    <th scope="col">Invited</th>
+                    <th scope="col">joined</th>
+                    <th scope="col">status</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let order of orders">
+                    <td>{{order.mealType}}</td>
+                    <td>{{order.restaurantName}}</td>
+                    <td>{{order.for.length}}</td>
+                    <td>{{order.membersJoined}}</td>
+                    <td>{{order.status}}</td>
+                    <td>
+                        <a [routerLink]="order._id">View</a>{{" "}}
+                        <a *ngIf=" order.status=='waiting' && currentUser._id == order.orderOwner" (click)="finishOrder(order._id)" >finish</a>{{" "}}
+                        <a *ngIf="order.status=='waiting'  && currentUser._id == order.orderOwner" (click)="cancelOrder(order._id)" >cancel</a>                    
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+    
+    </div>
+    <div class="card-footer center pb-0 pt-3 justify-content-md-center">
+        <ul *ngIf="pager&&pager.pages && pager.pages.length" class="pagination justify-content-md-center">
+            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item first-item">
+                <a [routerLink]="['/orders']" [queryParams]="{ page: 1 }" class="page-link">First</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === 1}" class="page-item previous-item">
+                <a [routerLink]="['/orders']" [queryParams]="{ page: pager.currentPage - 1 }" class="page-link">Previous</a>
+            </li>
+            <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}" class="page-item number-item">
+                <a [routerLink]="['/orders']" [queryParams]="{ page: page }" class="page-link">{{page}}</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item next-item">
+                <a [routerLink]="['/orders']" [queryParams]="{ page: pager.currentPage + 1 }" class="page-link">Next</a>
+            </li>
+            <li [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="page-item last-item">
+                <a [routerLink]="['/orders']" [queryParams]="{ page: pager.totalPages }" class="page-link">Last</a>
+            </li>
+        </ul>
+    </div>
+</div>

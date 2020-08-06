@@ -1,0 +1,84 @@
+
+<div class="row">
+
+
+<div class="card text-center  col-md-9">
+    <h3 class="card-header">Order details</h3>
+    <div class="card-body">  
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Person</th>
+                    <th scope="col">Item</th>
+                    <th scope="col">amount</th>
+                    <th scope="col">price</th>
+                    <th scope="col">comment</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr  *ngFor="let item of order.items">
+                    <td>{{item.user.name}}</td>
+                    <td>{{item.item}}</td>
+                    <td>{{item.amount}}</td>
+                    <td>{{item.price}}</td>
+                    <td>{{item.comment}}</td>
+                    <td *ngIf="item.user._id== currentUser._id || order.orderOwner== currentUser._id">
+                        <fa-icon [icon]="fadelete" (click)="removeItemFromOrder(item._id)"></fa-icon>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+    
+    </div>
+    <div class="card-footer center pb-0 pt-3 justify-content-md-center">
+       
+        <form #form="ngForm" (ngSubmit)="addItemToOrder(form)" class="group-form col-md-12 " >
+            <div class="form-group col-sm-12 col-lg-4 d-inline-block">
+                <label for="item">Item</label>
+                <input type="text"  name="item" id="item" #item="ngModel" ngModel class="form-control" required/>            
+                <div *ngIf="item.touched">
+                    <p class="alert alert-danger" *ngIf="item.errors?.required">item is required</p>
+                </div>
+            </div>
+        
+
+
+            <div class="form-group col-sm-12 col-lg-4 d-inline-block">
+                <label for="price">Price</label>
+                <input type="number"  name="price" id="price" #price="ngModel" ngModel class="form-control" required/>            
+                <div *ngIf="price.touched" >
+                    <p class="alert alert-danger" *ngIf="price.errors?.required">price is required</p>
+                </div>
+            </div>
+            
+
+            <div class="form-group col-sm-12 col-lg-4 d-inline-block">
+                <label for="amount">amount</label>
+                <input type="number"  name="amount" id="amount" #amount="ngModel" ngModel class="form-control" required/>            
+                <div *ngIf="amount.touched">
+                    <p class="alert alert-danger" *ngIf="amount.errors?.required">amount is required</p>
+                </div>
+            </div>
+        
+
+
+            <div class="form-group col-sm-12 col-lg-4 d-inline-block">
+                <label for="comment">comment</label>
+                <input type="text"  name="comment" id="comment" #comment="ngModel" ngModel class="form-control" required/>            
+                <div *ngIf="comment.touched">
+                    <p class="alert alert-danger" *ngIf="comment.errors?.required">amount is required</p>
+                </div>
+            </div>
+        
+        
+            <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Add</button>
+        </form>
+    </div>
+</div>
+
+<div class="menu col-md-3">
+    <img class="img-fluid" src='http://localhost:3000/images/orders_images/{{ order.menuImage }}' />
+</div>
+
+</div>

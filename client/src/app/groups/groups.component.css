@@ -1,0 +1,80 @@
+.groups{
+    margin: 2em 0em;
+}
+
+.groups h4{
+  position: absolute;
+  top: -17px;
+  left: 10px;
+  z-index: 10;
+  opacity: 4;
+  background: white;
+}
+
+.groups__names, .members{
+  padding-left: 0;
+  /* overflow-y: scroll; */
+  height: 40vh;
+  /* overflow: auto; */
+  border: black .1px solid;
+  position: relative;
+  padding-top: 2em;
+}
+.groups__group{
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  width: 50%;
+  margin: 0em 1em;
+}
+
+#myInput {
+  box-sizing: border-box;
+  font-size: 16px;
+  padding: 14px 20px 12px 20px;
+  /* border: none;
+  border-bottom: 1px solid #ddd; */
+}
+.dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  /* Dropdown Content (Hidden by Default) */
+  .dropdown-content {
+    position: absolute;
+    background-color: #f6f6f6;
+    min-width: 230px;
+    border: 1px solid #ddd;
+    z-index: 1;
+  }
+  
+  /* Links inside the dropdown */
+  .dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  
+  /* Change color of dropdown links on hover */
+  .dropdown-content a:hover {background-color: #f1f1f1}
+
+.members-list{
+    display: flex;
+    flex-wrap: wrap;
+}
+.member{
+    display: flex;
+    flex-direction: row;
+    width: 33.3%
+}
+
+.user-image{
+    max-height: 100px;
+    max-width: 80px;
+}
+.right{
+    display: flex;
+    flex-direction: column;
+    margin: 0em 1em;
+}

@@ -1,0 +1,38 @@
+<h2>Friends</h2>
+
+<form #f="ngForm" (ngSubmit)="addFriend(f)">
+    <div class="form-group">
+        <label for="">Email</label>
+        <input type="text" name="email" ngModel required #email="ngModel" class="form-control"
+        id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">   
+    </div>
+
+    <div *ngIf="email.touched">
+        <p class="alert alert-danger" *ngIf="email.errors?.required">Email is required</p>
+        <p class="alert alert-danger" *ngIf="email.errors?.pattern">This is not a valid Email</p>
+    </div>
+
+
+    <button type="submit" [disabled]="f.invalid" class="btn btn-primary">
+        Add Friend
+        <i class="fas fa-sign-in-alt"></i>
+    </button>    
+
+</form>
+
+<div class="friends">
+    <h4>Friends List</h4>
+    <div class="friends-list">
+        <div *ngFor="let friend of friends" class="friend">
+            <div>
+                <img class="img-fluid user-image" src='http://localhost:3000/images/orders_images/{{ friend.id.image }}' /> 
+            </div>
+            <div class="right" >
+                {{friend.name}}
+                <a (click)="unfriend(friend._id)">unfriend</a>
+            </div>
+        </div>
+    </div>
+
+    
+</div>

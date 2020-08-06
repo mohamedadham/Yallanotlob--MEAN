@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row">
+      <div class=" offset-sm-1 col-sm-5 latest-orders">
+        <h4>Latest Orders</h4>
+
+        <div *ngFor="let order of latestOrders">
+            {{order.mealType}} on {{order.createdAt |  date:'medium'}}
+        </div>
+      </div>
+    
+      <div class="col-sm-5 friends-activity offset-sm-1">
+        <h4>Friends Activity</h4>
+      </div>
+    </div>
+  </div>

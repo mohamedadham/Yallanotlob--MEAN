@@ -1,0 +1,44 @@
+
+<h5>Your Notifications</h5>
+<hr>
+
+<div *ngIf="notifications.length==0">
+    <h6>You have no notifications</h6>
+</div>
+<div  *ngFor="let notification of notifications">
+
+    <div  *ngIf="notification.type=='invitation'">
+        <span>
+            {{notification.order.orderOwner.name}} invited you to his  <a routerLink="/orders/{{notification.order._id}}">order</a>
+        </span>
+        <div *ngIf="notification.order.status=='waiting' && notification.order.for[0].status=='pending'">
+            <button (click)="acceptRequest(notification.order._id)" class="btn btn-primary">
+                Accept
+            </button> {{" "}}
+            <button (click)="rejectRequest(notification.order._id)" class="btn btn-primary">
+                Reject
+            </button>
+
+        </div>
+    </div>
+
+    <div  *ngIf="notification.type=='acceptInvitation'">
+        <span>
+            {{notification.order.orderOwner.name}} accepted your invitation to your <a routerLink="/orders/{{notification.order._id}}" >order</a>
+        </span>
+        <div *ngIf="notification.order.status=='waiting' && notification.order.for[0].status=='pending'">
+            <button (click)="acceptRequest(notification.order._id)" class="btn btn-primary">
+                Accept
+            </button> {{" "}}
+            <button (click)="rejectRequest(notification.order._id)" class="btn btn-primary">
+                Reject
+            </button>
+
+        </div>
+    </div>
+    <hr>
+
+
+
+
+</div>

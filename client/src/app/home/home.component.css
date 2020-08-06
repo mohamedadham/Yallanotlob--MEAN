@@ -1,0 +1,22 @@
+.latest-orders, .friends-activity{
+    margin-top: 4em;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    padding-left: 2em;
+    /* overflow-y: scroll; */
+    height: 40vh;
+    /* overflow: auto; */
+    border: black .1px solid;
+    position: relative;
+    padding-top: 2em;
+}
+
+.latest-orders h4, .friends-activity h4{
+    position: absolute;
+    top: -17px;
+    left: 10px;
+    z-index: 10;
+    opacity: 4;
+    background: white;
+}

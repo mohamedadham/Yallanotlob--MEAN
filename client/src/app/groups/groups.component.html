@@ -1,0 +1,70 @@
+<h2>Groups</h2>
+
+
+<form #f="ngForm" (ngSubmit)="addGroup(f)" class="group-form">
+    <div class="form-group">
+        <label for="name">Group</label>
+        <input type="text" name="name" id="name" #name="ngModel" ngModel class="form-control" required />
+    </div>
+
+    <div *ngIf="name.touched">
+        <p class="alert alert-danger" *ngIf="name.errors?.required">Group is required</p>
+    </div>
+
+
+    <button class="btn btn-primary" type="submit" [disabled]="f.invalid">Add</button>
+</form>
+
+<div class="groups row">
+
+    <div class="groups__names col-sm-4">
+        <h4>My Groups</h4>
+        <div *ngFor="let groupp of groups" class="groups__group">
+            <a (click)="getGroupMembers($event.target.id)" id={{groupp._id}}>{{groupp.name}} </a>
+            <a [hidden]="!(groupp.admin===currentUser._id)" id="{{groupp._id}}" (click)="deleteGroup(groupp._id)">
+                <fa-icon [icon]="fadelete"></fa-icon>
+            </a>
+        </div>
+    </div>
+
+    <div class="members col-sm-6 offset-sm-2">
+        <div class="container">
+            <h4>{{group.name}}</h4>
+            <form #form="ngForm" (ngSubmit)="addMemberToGroup(form)" class="group-form" *ngIf="isAdmin">
+                <div class="form-group">
+                    <label for="friendname">Your friend name</label>
+                    <input type="text" (change)="getFriends(friendname)" [(ngModel)]="friendInput" name="friendname"
+                        id="friendname" #friendname="ngModel" ngModel class="form-control" required />
+                    <div id="myDropdown" class="dropdown-content" [hidden]="!visible||friendInput.length==0">
+                        <a *ngFor="let friend of friends" (click)="setFriendId($event.target.id)"
+                            id="{{friend.id}}">{{friend.name}}</a>
+                    </div>
+
+                </div>
+
+                <div *ngIf="friendname.touched">
+                    <p class="alert alert-danger" *ngIf="friendname.errors?.required">Name is required</p>
+                </div>
+
+                <button class="btn btn-primary" type="submit" [disabled]="form.invalid">Add</button>
+            </form>
+
+            <div class="members-list">
+                <div *ngFor="let member of members" class="member">
+                    <div>
+                        <img class="img-fluid user-image"
+                            src='http://localhost:3000/images/orders_images/{{ member.image }}' />
+                    </div>
+                    <div class="right">
+                        {{member.name}}
+                        <a id="{{member._id}}" (click)="removeMemberFromGroup(group._id,$event.target.id)"
+                            *ngIf="isAdmin">Remove</a>
+                    </div>
+                </div>
+            </div>
+
+    </div>
+
+</div>
+
+</div>

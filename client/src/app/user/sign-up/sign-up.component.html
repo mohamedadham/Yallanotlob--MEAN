@@ -1,0 +1,66 @@
+
+<div class="headline">
+    <h2 class="mx-auto">Registeration</h2>
+</div>
+
+<div class="row pt-5">
+    <div class="col-md-6 mx-auto">
+        <div class="card rounded-0">
+            
+            <div class="card-body">
+                <form class="form" #f="ngForm" (ngSubmit)="onSubmit(f)">
+                  
+                    <div class="form-group">
+                        <label for=""> Name</label>
+                        <input name="name" ngModel required #name="ngModel" type="text"
+                            class="form-control rouned-0" required id="name">
+                    </div>
+                    
+                    <div *ngIf="name.touched">
+                        <p class="alert alert-danger" *ngIf="name.errors?.required">name is required</p>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="">Email</label>
+                        <input type="text" name="email" ngModel required #email="ngModel" class="form-control"
+                        id="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">   
+                    
+                    </div>
+
+                    <div *ngIf="email.touched">
+                        <p class="alert alert-danger" *ngIf="email.errors?.required">Email is required</p>
+                        <p class="alert alert-danger" *ngIf="email.errors?.pattern">This is not a valid Email</p>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label for=""> Password</label>
+                        <input name="password" ngModel required #password="ngModel" type="password"
+                            class="form-control rouned-0" required id="password">
+                    </div>
+
+                    <div *ngIf="password.touched">
+                        <p class="alert alert-danger" *ngIf="password.errors?.required">password is required</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="profileImage">Upload your image</label>
+                        <input  (change)="onFileSelect($event)" type="file" name="profileImage" id="profileImage" #profileImage="ngModel" ngModel class="form-control" required />
+                    </div>
+        
+                    <div *ngIf="profileImage.touched">
+                        <p class="alert alert-danger" *ngIf="profileImage.errors?.required">Image is required</p>
+                    </div>
+
+                  
+
+                    <button type="submit" [disabled]="f.invalid" class="btn btn-primary">
+                        Register
+                        <i class="fas fa-sign-in-alt"></i>
+                    </button>    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

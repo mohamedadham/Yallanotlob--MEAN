@@ -1,0 +1,9 @@
+form{
+    min-height: 200px;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+form button{
+   margin-top: 2em
+}
