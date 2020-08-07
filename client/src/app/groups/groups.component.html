@@ -36,7 +36,7 @@
                     <input type="text" (change)="getFriends(friendname)" [(ngModel)]="friendInput" name="friendname"
                         id="friendname" #friendname="ngModel" ngModel class="form-control" required />
                     <div id="myDropdown" class="dropdown-content" [hidden]="!visible||friendInput.length==0">
-                        <a *ngFor="let friend of friends" (click)="setFriendId($event.target.id)"
+                        <a *ngFor="let friend of friends" (click)="setFriendId(friend.id)"
                             id="{{friend.id}}">{{friend.name}}</a>
                     </div>
 

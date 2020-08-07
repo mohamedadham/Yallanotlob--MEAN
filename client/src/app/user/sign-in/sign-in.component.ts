@@ -32,7 +32,6 @@ export class SignInComponent implements OnInit {
       this._auth.loginUser(f.value.email,f.value.password)
     .subscribe(
       res => {
-        console.log(res)
         this.router.navigate([''])
         this._auth.setIsLoggedIn(true)
       },

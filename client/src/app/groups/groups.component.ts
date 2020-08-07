@@ -45,6 +45,7 @@ export class GroupsComponent implements OnInit {
   }
 
   addGroup(f: NgForm) {
+    console.log(f.value.name)
     this.groupsServ.createGroup(f.value.name).subscribe(() => { this.getGroups(); f.reset() }),
       (err) => this.toastr.error(err)
   }
@@ -60,19 +61,24 @@ export class GroupsComponent implements OnInit {
   }
 
   getGroupMembers(id) {
-    this.groupsServ.getGroupMembers(id).subscribe((group: IGroup) =>{ this.group = group; this.members= group.members;
-     this.isAdmin= this.currentUser._id == group.admin
+    this.groupsServ.getGroupMembers(id).subscribe((group: IGroup) =>{ 
+      console.log(group)
+      this.group = group; this.members= group.members;
+      this.isAdmin= this.currentUser._id == group.admin
 
     },
       (err) => this.toastr.error(err))
   }
 
   addMemberToGroup(f:NgForm){
+    console.log(f)
+    console.log(this._friendId, this.group._id)
     this.groupsServ.addMemberToGroup(this._friendId, this.group._id).subscribe(()=> {this.getGroupMembers(this.group._id); f.reset(); },(err)=> this.toastr.error(err))
   }
 
-  getFriends(name){
-   this.friendsServ.getFriends(name).subscribe((friends)=> this.friends=friends,(err)=> this.toastr.error(err))
+  getFriends(f){
+    console.log(f)
+   this.friendsServ.getFriends(f.value).subscribe((friends)=> this.friends=friends,(err)=> this.toastr.error(err))
   }
 
   removeMemberFromGroup(groupId,memberId){

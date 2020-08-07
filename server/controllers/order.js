@@ -15,7 +15,6 @@ const sendNotification = async (user, order, notificationPayload) => {
 
 
     const orderOwner = await userModel.findOne({ _id: order.orderOwner }).select('name').exec()
-
     Promise.all(allSubscriptions.map(sub => webpush.sendNotification(
         sub, JSON.stringify(notificationPayload))
     ))
@@ -89,8 +88,9 @@ exports.makeOrder = async (req, res) => {
         }
         await order.save();
 
-        const orderOwner= userModel.findOne({ _id: userId }).select('name').exec()
-
+        console.log(userId)
+        const orderOwner= await userModel.findOne({ _id: userId }).select('name').exec()
+        console.log(orderOwner)
         const notificationPayload = {
             "notification": {
                 "title": "New order",
@@ -238,7 +238,7 @@ exports.acceptOrder = async (req, res) => {
         await userModel.updateOne({ _id: order.orderOwner }, { "$push": { notifications: { type: "acceptInvitation", order: order._id } } })
         
 
-        const member= userModel.findOne({ _id: userId }).select('name').exec()
+        const member= await userModel.findOne({ _id: userId }).select('name').exec()
 
         const notificationPayload = {
             "notification": {

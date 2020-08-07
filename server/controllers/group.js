@@ -84,7 +84,7 @@ exports.getGroupMembers = async (req, res) => {
     try {
         const { userId } = req.session
         const { groupId } = req.params
-        const group = await GroupModel.findOne({ $or: [{ _id: groupId, admin: userId }, { _id: groupId, members: userId }] }).select('members name admin').populate('members', 'name').exec()
+        const group = await GroupModel.findOne({ $or: [{ _id: groupId, admin: userId }, { _id: groupId, members: userId }] }).select('members name admin').populate('members', 'name image').exec()
         if (group) return res.status(200).json(group)
         res.status(404).json({ error: "Could not find any group" })
 
